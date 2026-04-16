@@ -82,8 +82,8 @@ export default function App() {
       </Route>
       {/* Tedarikçi Portalı */}
       <Route path="/tedarikci" element={<SupplierLogin />} />
-      <Route path="/tedarikci" element={<SupplierPrivateRoute><SupplierLayout /></SupplierPrivateRoute>}>
-        <Route path="panel" element={<SupplierDashboard />} />
+      <Route path="/tedarikci/panel" element={<SupplierPrivateRoute><SupplierLayout /></SupplierPrivateRoute>}>
+        <Route index element={<SupplierDashboard />} />
         <Route path="ihaleler" element={<SupplierTenders />} />
         <Route path="tekliflerim" element={<SupplierMyBids />} />
         <Route path="siparislerim" element={<SupplierOrders />} />
