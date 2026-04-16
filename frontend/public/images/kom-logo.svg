@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120">
+  <!-- K harfi -->
+  <path d="M10,10 L40,10 L40,45 L75,10 L115,10 L65,55 L115,110 L75,110 L40,65 L40,110 L10,110 Z" fill="#E81E25"/>
+
+  <!-- O harfi -->
+  <rect x="125" y="10" width="100" height="100" rx="12" fill="#E81E25"/>
+  <rect x="160" y="45" width="30" height="30" rx="10" fill="#FFFFFF"/>
+
+  <!-- M harfi -->
+  <path d="M240,10 L270,10 L270,110 L240,110 Z" fill="#E81E25"/>
+  <path d="M280,10 L310,10 L310,110 L280,110 Z" fill="#E81E25"/>
+  <path d="M320,10 L350,10 L350,110 L320,110 Z" fill="#E81E25"/>
+  <rect x="240" y="10" width="110" height="30" fill="#E81E25"/>
+
+  <!-- (R) simgesi -->
+  <circle cx="370" cy="20" r="12" fill="none" stroke="#E81E25" stroke-width="2"/>
+  <text x="370" y="25" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="#E81E25">R</text>
+</svg>
