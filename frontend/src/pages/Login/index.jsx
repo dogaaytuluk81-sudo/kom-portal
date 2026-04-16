@@ -61,11 +61,6 @@ const Login = () => {
         ))}
 
         {/* Sol üst */}
-        <motion.div style={{ position: 'absolute', top: 32, left: 40, display: 'flex', alignItems: 'center', gap: 8, zIndex: 1 }}
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
-          <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#fff', boxShadow: '0 0 12px rgba(255,255,255,0.5)' }} />
-          <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.7)', letterSpacing: 3, textTransform: 'uppercase', fontWeight: 600 }}>İş Ortağı Portalı</span>
-        </motion.div>
 
         {/* İçerik */}
         <motion.div style={{ position: 'relative', zIndex: 1, maxWidth: 420, marginBottom: 48 }}
@@ -73,7 +68,7 @@ const Login = () => {
           <img src="/images/kom-logo.svg" alt="KOM" style={{ width: 180, height: 'auto', filter: 'brightness(0) invert(1)', marginBottom: 28 }} />
           <div style={{ width: 40, height: 3, background: 'rgba(255,255,255,0.5)', borderRadius: 2, marginBottom: 20 }} />
           <h1 style={{ fontSize: '2rem', color: '#fff', fontWeight: 800, letterSpacing: -0.5, lineHeight: 1.2, margin: 0 }}>
-            Mayo & Tekstil<br />İş Ortağı Portalı
+            Mayo & Tekstil<br />Yönetim Paneli
           </h1>
           <p style={{ marginTop: 14, fontSize: 14, color: 'rgba(255,255,255,0.75)', lineHeight: 1.7, maxWidth: 360 }}>
             Tedarik zinciri yönetimi, sipariş takibi ve iş ortaklığı süreçlerinizi tek noktadan yönetin.
