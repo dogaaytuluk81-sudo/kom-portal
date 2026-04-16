@@ -1224,7 +1224,11 @@ app.post('/api/stores/create', (req, res) => {
   res.json({ success: true, data: s, message: 'Mağaza eklendi' });
 });
 
-const PORT = 3100;
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🚀 KOM Portal API çalışıyor: http://localhost:${PORT} (LAN erişimi açık)`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = 3100;
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`KOM Portal API çalışıyor: http://localhost:${PORT}`);
+  });
+}
+
+export default app;
