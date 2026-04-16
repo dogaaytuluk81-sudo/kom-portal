@@ -160,27 +160,37 @@ const Targets = () => {
                       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
                         style={{ marginTop: 18, paddingTop: 18, borderTop: '1px solid #f1f5f9' }}>
                         <p style={{ fontSize: 11, fontWeight: 700, color: '#64748b', margin: '0 0 12px', textTransform: 'uppercase', letterSpacing: 0.5 }}>Aylık Plan vs Gerçekleşme</p>
-                        <div style={{ display: 'flex', alignItems: 'flex-end', gap: 6, height: 120 }}>
-                          {MONTHS.map((m, mi) => {
-                            const plan = t.MONTHLY_PLAN[mi] || 0;
-                            const actual = t.MONTHLY_ACTUAL[mi] || 0;
-                            const max = Math.max(...t.MONTHLY_PLAN, ...t.MONTHLY_ACTUAL, 1);
-                            return (
-                              <div key={mi} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
-                                <div style={{ display: 'flex', gap: 2, width: '100%', alignItems: 'flex-end', flex: 1 }}>
-                                  <div style={{ flex: 1, height: `${(plan / max) * 100}%`, background: '#e2e8f0', borderRadius: '3px 3px 0 0' }} title={`Plan: ${plan}`} />
-                                  <div style={{ flex: 1, height: `${(actual / max) * 100}%`, background: actual >= plan ? '#10b981' : actual > 0 ? '#f59e0b' : '#f1f5f9', borderRadius: '3px 3px 0 0' }} title={`Gerçek: ${actual}`} />
-                                </div>
-                                <span style={{ fontSize: 9, color: '#94a3b8', fontWeight: 600 }}>{m}</span>
+                        {(() => {
+                          const maxVal = Math.max(...(t.MONTHLY_PLAN || []), ...(t.MONTHLY_ACTUAL || []), 1);
+                          const barH = 100;
+                          return (
+                            <>
+                              <div style={{ display: 'flex', alignItems: 'flex-end', gap: 4, height: barH }}>
+                                {MONTHS.map((m, mi) => {
+                                  const plan = (t.MONTHLY_PLAN || [])[mi] || 0;
+                                  const actual = (t.MONTHLY_ACTUAL || [])[mi] || 0;
+                                  const planH = Math.max((plan / maxVal) * barH, plan > 0 ? 4 : 0);
+                                  const actualH = Math.max((actual / maxVal) * barH, actual > 0 ? 4 : 0);
+                                  const actualColor = actual >= plan ? '#10b981' : actual > 0 ? '#f59e0b' : '#e2e8f0';
+                                  return (
+                                    <div key={mi} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+                                      <div style={{ display: 'flex', gap: 2, width: '100%', alignItems: 'flex-end', height: barH }}>
+                                        <div style={{ flex: 1, height: planH, background: '#e2e8f0', borderRadius: '3px 3px 0 0', minHeight: plan > 0 ? 4 : 0 }} title={`Plan: ${plan}`} />
+                                        <div style={{ flex: 1, height: actualH, background: actualColor, borderRadius: '3px 3px 0 0', minHeight: actual > 0 ? 4 : 0 }} title={`Gerçek: ${actual}`} />
+                                      </div>
+                                      <span style={{ fontSize: 9, color: '#94a3b8', fontWeight: 600 }}>{m}</span>
+                                    </div>
+                                  );
+                                })}
                               </div>
-                            );
-                          })}
-                        </div>
-                        <div style={{ display: 'flex', gap: 16, justifyContent: 'center', marginTop: 8, fontSize: 10, color: '#64748b' }}>
-                          <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}><span style={{ width: 8, height: 8, background: '#e2e8f0', borderRadius: 2 }} /> Plan</span>
-                          <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}><span style={{ width: 8, height: 8, background: '#10b981', borderRadius: 2 }} /> Hedefin üstü</span>
-                          <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}><span style={{ width: 8, height: 8, background: '#f59e0b', borderRadius: 2 }} /> Hedefin altı</span>
-                        </div>
+                              <div style={{ display: 'flex', gap: 16, justifyContent: 'center', marginTop: 8, fontSize: 10, color: '#64748b' }}>
+                                <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}><span style={{ width: 8, height: 8, background: '#e2e8f0', borderRadius: 2, display: 'inline-block' }} /> Plan</span>
+                                <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}><span style={{ width: 8, height: 8, background: '#10b981', borderRadius: 2, display: 'inline-block' }} /> Hedefin üstü</span>
+                                <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}><span style={{ width: 8, height: 8, background: '#f59e0b', borderRadius: 2, display: 'inline-block' }} /> Hedefin altı</span>
+                              </div>
+                            </>
+                          );
+                        })()}
                       </motion.div>
                     )}
                   </div>
