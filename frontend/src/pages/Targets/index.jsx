@@ -14,7 +14,6 @@ const Targets = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [saving, setSaving] = useState(false);
   const [activeTab, setActiveTab] = useState('targets');
-  const [selected, setSelected] = useState(null);
   const { form, setField, reset } = useForm({
     STORE: '', PRODUCT: '', TARGET_QTY: 1000, TARGET_REVENUE: 0
   });
@@ -96,7 +95,6 @@ const Targets = () => {
 
             return (
               <motion.div key={t.ID} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }}
-                onClick={() => setSelected(selected?.ID === t.ID ? null : t)}
                 style={{
                   background: '#fff', borderRadius: 16, border: '1px solid #e2e8f0',
                   overflow: 'hidden', cursor: 'pointer', transition: 'all 0.25s',
@@ -157,9 +155,9 @@ const Targets = () => {
                       <span>Kalan: {Math.max(t.TARGET_QTY - t.ACHIEVED_QTY, 0)} adet</span>
                     </div>
 
-                    {/* Seçiliyse aylık mini grafik */}
-                    {selected?.ID === t.ID && (
-                      <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }}
+                    {/* Aylık mini grafik — her zaman görünür */}
+                    {(
+                      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
                         style={{ marginTop: 18, paddingTop: 18, borderTop: '1px solid #f1f5f9' }}>
                         <p style={{ fontSize: 11, fontWeight: 700, color: '#64748b', margin: '0 0 12px', textTransform: 'uppercase', letterSpacing: 0.5 }}>Aylık Plan vs Gerçekleşme</p>
                         <div style={{ display: 'flex', alignItems: 'flex-end', gap: 6, height: 120 }}>
