@@ -91,7 +91,7 @@ const SupplierPerformance = () => {
             {(() => {
               const data = perf.monthlyPerformance;
               const n = data.length;
-              const pts = data.map((m, i) => ({ x: (i / (n - 1)) * 560 + 20, y: 180 - (m.score / 100) * 160 }));
+              const pts = data.map((m, i) => ({ x: (i / (n - 1)) * 540 + 30, y: 180 - (m.score / 100) * 160 }));
               const linePath = pts.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
               const areaPath = `${linePath} L ${pts[n-1].x} 180 L ${pts[0].x} 180 Z`;
               return (
