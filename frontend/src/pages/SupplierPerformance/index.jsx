@@ -72,20 +72,45 @@ const SupplierPerformance = () => {
       {/* Aylık Performans Trend */}
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
         style={{ background: '#fff', borderRadius: 16, padding: 24, border: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0,0,0,0.03)' }}>
-        <h3 style={{ fontSize: 14, fontWeight: 800, color: '#0f172a', margin: '0 0 18px' }}>Aylık Performans Trendi</h3>
-        <div style={{ display: 'flex', alignItems: 'flex-end', gap: 12, height: 140 }}>
+        <h3 style={{ fontSize: 14, fontWeight: 800, color: '#0f172a', margin: '0 0 24px' }}>Aylık Performans Trendi</h3>
+        <div style={{ position: 'relative', height: 180 }}>
+          {/* Yatay grid çizgileri */}
+          {[100, 75, 50, 25].map(v => (
+            <div key={v} style={{ position: 'absolute', left: 0, right: 0, top: `${100 - v}%`, borderTop: '1px dashed #f1f5f9', display: 'flex', alignItems: 'center' }}>
+              <span style={{ fontSize: 9, color: '#cbd5e1', fontWeight: 600, minWidth: 24 }}>{v}</span>
+            </div>
+          ))}
+          {/* Çizgi grafik SVG */}
+          <svg width="100%" height="100%" viewBox="0 0 600 180" preserveAspectRatio="none" style={{ position: 'absolute', top: 0, left: 0 }}>
+            <defs>
+              <linearGradient id="perfGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.2" />
+                <stop offset="100%" stopColor="#3b82f6" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            {(() => {
+              const data = perf.monthlyPerformance;
+              const n = data.length;
+              const pts = data.map((m, i) => ({ x: (i / (n - 1)) * 560 + 20, y: 180 - (m.score / 100) * 160 }));
+              const linePath = pts.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
+              const areaPath = `${linePath} L ${pts[n-1].x} 180 L ${pts[0].x} 180 Z`;
+              return (
+                <>
+                  <path d={areaPath} fill="url(#perfGrad)" />
+                  <path d={linePath} fill="none" stroke="#3b82f6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                  {pts.map((p, i) => (
+                    <circle key={i} cx={p.x} cy={p.y} r="5" fill="#fff" stroke={data[i].score >= 95 ? '#10b981' : data[i].score >= 90 ? '#3b82f6' : '#f59e0b'} strokeWidth="2.5" />
+                  ))}
+                </>
+              );
+            })()}
+          </svg>
+        </div>
+        {/* Ay etiketleri */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 8, paddingLeft: 24 }}>
           {perf.monthlyPerformance.map((m, i) => (
-            <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-              <span style={{ fontSize: 12, fontWeight: 800, color: m.score >= 95 ? '#10b981' : m.score >= 90 ? '#3b82f6' : '#f59e0b' }}>{m.score}</span>
-              <motion.div
-                initial={{ height: 0 }}
-                animate={{ height: `${m.score}%` }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                style={{
-                  width: '100%', borderRadius: '6px 6px 0 0',
-                  background: `linear-gradient(180deg, ${m.score >= 95 ? '#10b981' : m.score >= 90 ? '#3b82f6' : '#f59e0b'}, ${m.score >= 95 ? '#10b98188' : m.score >= 90 ? '#3b82f688' : '#f59e0b88'})`,
-                }}
-              />
+            <div key={i} style={{ textAlign: 'center' }}>
+              <span style={{ fontSize: 11, fontWeight: 800, color: m.score >= 95 ? '#10b981' : m.score >= 90 ? '#3b82f6' : '#f59e0b', display: 'block' }}>{m.score}</span>
               <span style={{ fontSize: 10, color: '#94a3b8', fontWeight: 600 }}>{m.month.slice(5)}</span>
             </div>
           ))}
