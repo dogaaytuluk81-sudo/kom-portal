@@ -107,7 +107,7 @@ const SupplierPerformance = () => {
           </svg>
         </div>
         {/* Ay etiketleri */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 8, paddingLeft: 24 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 8, paddingLeft: 30, paddingRight: 30 }}>
           {perf.monthlyPerformance.map((m, i) => (
             <div key={i} style={{ textAlign: 'center' }}>
               <span style={{ fontSize: 11, fontWeight: 800, color: m.score >= 95 ? '#10b981' : m.score >= 90 ? '#3b82f6' : '#f59e0b', display: 'block' }}>{m.score}</span>
