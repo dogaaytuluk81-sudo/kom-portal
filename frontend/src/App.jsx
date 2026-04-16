@@ -82,20 +82,20 @@ export default function App() {
       </Route>
       {/* Tedarikçi Portalı */}
       <Route path="/tedarikci" element={<SupplierLogin />} />
-      <Route path="/tedarikci/panel" element={<SupplierPrivateRoute><SupplierLayout /></SupplierPrivateRoute>}>
-        <Route index element={<SupplierDashboard />} />
-        <Route path="ihaleler" element={<SupplierTenders />} />
-        <Route path="tekliflerim" element={<SupplierMyBids />} />
-        <Route path="siparislerim" element={<SupplierOrders />} />
-        <Route path="teslimat" element={<SupplierDeliveries />} />
-        <Route path="faturalar" element={<SupplierInvoices />} />
-        <Route path="katalog" element={<SupplierCatalog />} />
-        <Route path="mesajlar" element={<SupplierMessages />} />
-        <Route path="dokumanlar" element={<SupplierDocuments />} />
-        <Route path="sozlesmeler" element={<SupplierContracts />} />
-        <Route path="performans" element={<SupplierPerformance />} />
-        <Route path="bildirimler" element={<SupplierNotifications />} />
-        <Route path="profil" element={<SupplierProfile />} />
+      <Route element={<SupplierPrivateRoute><SupplierLayout /></SupplierPrivateRoute>}>
+        <Route path="/tedarikci/panel" element={<SupplierDashboard />} />
+        <Route path="/tedarikci/ihaleler" element={<SupplierTenders />} />
+        <Route path="/tedarikci/tekliflerim" element={<SupplierMyBids />} />
+        <Route path="/tedarikci/siparislerim" element={<SupplierOrders />} />
+        <Route path="/tedarikci/teslimat" element={<SupplierDeliveries />} />
+        <Route path="/tedarikci/faturalar" element={<SupplierInvoices />} />
+        <Route path="/tedarikci/katalog" element={<SupplierCatalog />} />
+        <Route path="/tedarikci/mesajlar" element={<SupplierMessages />} />
+        <Route path="/tedarikci/dokumanlar" element={<SupplierDocuments />} />
+        <Route path="/tedarikci/sozlesmeler" element={<SupplierContracts />} />
+        <Route path="/tedarikci/performans" element={<SupplierPerformance />} />
+        <Route path="/tedarikci/bildirimler" element={<SupplierNotifications />} />
+        <Route path="/tedarikci/profil" element={<SupplierProfile />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
